@@ -1,8 +1,13 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-// base '/waterfront/' for the GitHub Pages project site; '/' in dev.
-export default defineConfig(({ command }) => ({
-  base: command === 'build' ? '/waterfront/' : '/',
-  plugins: [react()],
-}))
+// Base path for GitHub Pages project sites. In CI we derive it from the repo
+// name (GITHUB_REPOSITORY="owner/repo") so the same code deploys correctly to
+// any Pages repo (waterfront, waterfront-news, timelens, …); local dev uses '/'.
+export default defineConfig(({ command }) => {
+  const repo = process.env.GITHUB_REPOSITORY?.split('/')[1]
+  return {
+    base: command === 'build' ? `/${repo || 'waterfront'}/` : '/',
+    plugins: [react()],
+  }
+})

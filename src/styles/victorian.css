@@ -771,6 +771,210 @@
 @keyframes vb-fade { from { opacity: 0; } to { opacity: 1; } }
 
 /* ============================================================================
+   Waterfront — front-page layout (arched masthead → hero → period grid)
+   Mirrors a Frank-Leslie's-style illustrated front page.
+   ============================================================================ */
+.wf-masthead {
+  text-align: center;
+  padding: 18px 12px 6px;
+  background: var(--vb-paper);
+}
+.wf-masthead__kicker {
+  font-family: var(--vb-font-sc);
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--vb-meta);
+}
+/* Arched blackletter nameplate — SVG scales fluidly with its viewBox */
+.wf-arch {
+  display: block;
+  width: 100%;
+  max-width: 420px;
+  height: auto;
+  margin: -6px auto -18px;   /* arc has built-in slack; pull neighbours snug */
+}
+.wf-arch__text {
+  font-family: var(--vb-font-masthead);
+  font-weight: 700;
+  font-size: 116px;          /* in viewBox units → scales with width */
+  fill: var(--vb-ink);
+  letter-spacing: 0.01em;
+}
+
+/* Hero feature visual — placeholder: woodcut → modern photo */
+.wf-hero {
+  margin: 0 16px;
+  border-top: 3px double var(--vb-rule);
+  border-bottom: 1px solid var(--vb-rule);
+  padding: 12px 0 10px;
+}
+.wf-hero__art {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  border: 1px solid var(--vb-rule);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  /* left half reads as aged engraving, right half as clean modern plate */
+  background:
+    linear-gradient(90deg,
+      var(--vb-paper-aged) 0%,
+      var(--vb-paper-aged) 42%,
+      var(--vb-paper-news) 58%,
+      var(--vb-paper-news) 100%);
+}
+.wf-hero__art::before {     /* halftone dots over the woodcut (left) half only */
+  content: "";
+  position: absolute;
+  inset: 0 58% 0 0;
+  background-image: radial-gradient(circle, rgba(26,22,17,0.5) 28%, transparent 30%);
+  background-size: 5px 5px;
+  opacity: 0.22;
+  pointer-events: none;
+}
+.wf-hero__side {
+  font-family: var(--vb-font-sc);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--vb-meta);
+  z-index: 1;
+}
+.wf-hero__side--woodcut { color: var(--vb-oxblood); }
+.wf-hero__side--modern  { color: var(--vb-indigo); }
+.wf-hero__arrow { color: var(--vb-vermilion); font-size: 18px; z-index: 1; }
+.wf-hero__note {
+  text-align: center;
+  font-family: var(--vb-font-body);
+  font-style: italic;
+  font-size: 12px;
+  color: var(--vb-meta);
+  margin-top: 8px;
+}
+
+/* Folio / issue rule */
+.wf-folio {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 16px;
+  padding: 7px 0;
+  border-bottom: 3px double var(--vb-rule);
+  font-family: var(--vb-font-sc);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--vb-meta);
+}
+.wf-folio__center { color: var(--vb-ink); }
+
+/* Period grid — each block repeats; one per historic period */
+.wf-grid { padding: 0 16px; }
+.wf-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;   /* 3 across */
+  grid-template-rows: auto auto;        /* 2 down  */
+  column-gap: 12px;
+  row-gap: 8px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--vb-rule-soft);
+  text-decoration: none;
+  color: inherit;
+}
+.wf-card:last-child { border-bottom: none; }
+
+.wf-card__thumb {            /* top-left third — art / video thumbnail */
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+  position: relative;
+  aspect-ratio: 1 / 1;
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid var(--vb-rule);
+  background: var(--vb-ink-ground);
+}
+.wf-card__thumb img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: sepia(0.55) contrast(1.05);
+}
+.wf-card__halftone {
+  position: absolute; inset: 0;
+  background-image: radial-gradient(circle, rgba(26,22,17,0.55) 28%, transparent 30%);
+  background-size: 4px 4px;
+  mix-blend-mode: multiply;
+  opacity: 0.16;
+  pointer-events: none;
+}
+.wf-card__play {            /* art/video affordance */
+  position: absolute;
+  bottom: 5px; right: 5px;
+  width: 22px; height: 22px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 9px;
+  color: var(--vb-gold);
+  background: rgba(26, 22, 17, 0.78);
+  border: 1px solid var(--vb-gold);
+  border-radius: 50%;
+}
+
+.wf-card__head {            /* top row, remaining two-thirds */
+  grid-column: 2 / 4;
+  grid-row: 1 / 2;
+  align-self: start;
+}
+.wf-card__kicker {
+  font-family: var(--vb-font-sc);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--vb-vermilion);
+}
+.wf-card__title {
+  font-family: var(--vb-font-display);
+  font-weight: 700;
+  font-size: clamp(18px, 5.2vw, 22px);
+  line-height: 1.12;
+  color: var(--vb-ink);
+  margin: 3px 0 4px;
+}
+.wf-card__range {
+  font-family: var(--vb-font-sc);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--vb-meta);
+}
+.wf-card__body {            /* full-width second row */
+  grid-column: 1 / 4;
+  grid-row: 2 / 3;
+}
+.wf-card__teaser {
+  font-family: var(--vb-font-body);
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--vb-ink-soft);
+  /* clamp the teaser so each block stays compact and even */
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.wf-card__more {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+  font-family: var(--vb-font-sc);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--vb-indigo);
+}
+
+/* ============================================================================
    Reduced motion — kill all decorative motion, keep static colorized stills
    ============================================================================ */
 @media (prefers-reduced-motion: reduce) {
