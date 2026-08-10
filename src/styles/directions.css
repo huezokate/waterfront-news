@@ -1,0 +1,274 @@
+/* ============================================================================
+   TimeLens — Design Directions specimen pages (/directions)
+   Three self-contained themes (T-001-02): each .dx--{a,b,c} block swaps the
+   custom properties; the specimen markup underneath is identical, so the
+   stakeholder compares type/palette/ornament apples-to-apples.
+   ============================================================================ */
+
+.dx {
+  --dx-paper: #f4ecd8;
+  --dx-ink: #1a1a1a;
+  --dx-accent: #b33a2b;
+  --dx-link: #3b4a6b;
+  --dx-meta: #6b6156;
+  --dx-gold: #c8a04b;
+  --dx-rule: rgba(26, 26, 26, 0.55);
+  --dx-font-masthead: 'UnifrakturCook', system-ui, serif;
+  --dx-font-display: 'IM Fell Double Pica', serif;
+  --dx-font-body: 'IM Fell English', serif;
+  --dx-font-dateline: 'IM Fell English SC', serif;
+  --dx-dateline-caps: none; /* SC font is already small-caps */
+  --dx-leading: 1.6;
+
+  background: var(--dx-paper);
+  color: var(--dx-ink);
+  font-family: var(--dx-font-body);
+  font-size: 17px;
+  line-height: var(--dx-leading);
+  min-height: 100vh;
+  overflow-wrap: break-word;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  background-size: 180px;
+}
+.dx *,
+.dx *::before,
+.dx *::after { box-sizing: border-box; }
+.dx :focus-visible { outline: 2.5px solid var(--dx-link); outline-offset: 2px; }
+.dx a { color: var(--dx-link); }
+
+/* Direction B — Refined Editorial / Didone */
+.dx--b {
+  --dx-accent: #7a2e22;
+  --dx-rule: rgba(26, 26, 26, 0.3); /* hairline, restrained */
+  --dx-font-masthead: 'Playfair Display', serif;
+  --dx-font-display: 'Playfair Display', serif;
+  --dx-font-body: 'Lora', serif;
+  --dx-font-dateline: 'Playfair Display', serif;
+  --dx-dateline-caps: all-small-caps;
+  --dx-leading: 1.65;
+}
+
+/* Direction C — Heritage Almanac */
+.dx--c {
+  --dx-paper: #ede4d3;
+  --dx-ink: #4a3826;
+  --dx-accent: #6e1e1e;
+  --dx-meta: #5c5448;
+  --dx-rule: rgba(74, 56, 38, 0.5);
+  --dx-font-masthead: 'Old Standard TT', serif;
+  --dx-font-display: 'Old Standard TT', serif;
+  --dx-font-body: 'PT Serif', serif;
+  --dx-font-dateline: 'Old Standard TT', serif;
+  --dx-dateline-caps: uppercase;
+}
+
+.dx-page {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 20px 72px;
+}
+
+/* ── Top bar: back link + A/B/C switcher ─────────────────────────── */
+.dx-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 0 10px;
+  border-bottom: 1px solid var(--dx-rule);
+  font-family: var(--dx-font-dateline);
+  font-variant: var(--dx-dateline-caps);
+  font-size: 14px;
+  letter-spacing: 0.08em;
+}
+.dx-bar__tabs { display: flex; gap: 6px; }
+.dx-bar__tab {
+  display: inline-block;
+  min-width: 34px;
+  text-align: center;
+  padding: 4px 8px;
+  border: 1px solid var(--dx-rule);
+  text-decoration: none;
+  color: var(--dx-ink);
+}
+.dx-bar__tab[aria-current='page'] {
+  background: var(--dx-ink);
+  color: var(--dx-paper);
+  border-color: var(--dx-ink);
+}
+
+/* ── Masthead ────────────────────────────────────────────────────── */
+.dx-masthead {
+  text-align: center;
+  padding: 26px 8px 14px;
+  border-bottom: 3px double var(--dx-rule);
+}
+.dx--b .dx-masthead { border-bottom-width: 1px; border-bottom-style: solid; }
+.dx-masthead__kicker {
+  font-family: var(--dx-font-dateline);
+  font-variant: var(--dx-dateline-caps);
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  color: var(--dx-meta);
+  margin-bottom: 8px;
+}
+.dx-masthead__name {
+  font-family: var(--dx-font-masthead);
+  font-weight: 700;
+  font-size: clamp(34px, 9vw, 58px);
+  line-height: 1.05;
+  margin: 0 0 6px;
+}
+.dx-masthead__rule {
+  font-family: var(--dx-font-dateline);
+  font-variant: var(--dx-dateline-caps);
+  font-size: 12.5px;
+  letter-spacing: 0.14em;
+  color: var(--dx-meta);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.dx-fleuron { color: var(--dx-accent); font-size: 13px; }
+
+/* ── Specimen article ────────────────────────────────────────────── */
+.dx-headline {
+  font-family: var(--dx-font-display);
+  font-weight: 700;
+  font-size: clamp(26px, 7vw, 38px);
+  line-height: 1.15;
+  text-align: center;
+  margin: 26px 0 4px;
+  text-wrap: balance;
+}
+.dx-dateline {
+  font-family: var(--dx-font-dateline);
+  font-variant: var(--dx-dateline-caps);
+  font-size: 13.5px;
+  letter-spacing: 0.12em;
+  text-align: center;
+  color: var(--dx-accent);
+  margin-bottom: 16px;
+}
+.dx-article p { margin: 0 0 14px; }
+.dx-article p:first-of-type::first-letter {
+  font-family: var(--dx-font-display);
+  font-size: 3.1em;
+  line-height: 0.85;
+  float: left;
+  padding: 4px 8px 0 0;
+  color: var(--dx-accent);
+}
+.dx-article .dx-end {
+  display: block;
+  text-align: center;
+  color: var(--dx-accent);
+  font-size: 15px;
+  margin: 4px 0 0;
+}
+
+/* ── Direction notes (palette, type, ornament, risk) ─────────────── */
+.dx-section {
+  margin-top: 34px;
+  border-top: 3px double var(--dx-rule);
+  padding-top: 14px;
+}
+.dx--b .dx-section { border-top-width: 1px; border-top-style: solid; }
+.dx-section__title {
+  font-family: var(--dx-font-dateline);
+  font-variant: var(--dx-dateline-caps);
+  font-size: 14px;
+  letter-spacing: 0.18em;
+  color: var(--dx-meta);
+  margin: 0 0 14px;
+  text-align: center;
+}
+.dx-swatches {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(118px, 1fr));
+  gap: 10px;
+}
+.dx-swatch { border: 1px solid var(--dx-rule); }
+.dx-swatch__chip { height: 56px; border-bottom: 1px solid var(--dx-rule); }
+.dx-swatch__label {
+  padding: 7px 9px 9px;
+  font-size: 12.5px;
+  line-height: 1.45;
+  font-family: var(--dx-font-body);
+}
+.dx-swatch__hex { color: var(--dx-meta); display: block; }
+.dx-swatch__ratio { color: var(--dx-accent); display: block; }
+
+.dx-typelist { margin: 0; }
+.dx-typelist dt {
+  font-family: var(--dx-font-dateline);
+  font-variant: var(--dx-dateline-caps);
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  color: var(--dx-accent);
+  margin-top: 12px;
+}
+.dx-typelist dd { margin: 2px 0 0; }
+
+.dx-note { margin: 0; }
+.dx-note--risk { color: var(--dx-meta); font-style: italic; }
+
+/* ── Prev / next footer ──────────────────────────────────────────── */
+.dx-foot {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 36px;
+  padding-top: 14px;
+  border-top: 1px solid var(--dx-rule);
+  font-family: var(--dx-font-dateline);
+  font-variant: var(--dx-dateline-caps);
+  font-size: 14px;
+  letter-spacing: 0.08em;
+}
+
+/* ============================================================================
+   Index page (/directions) — neutral cream shell, cards preview each theme
+   ============================================================================ */
+.dxi-cards { display: grid; gap: 18px; margin-top: 24px; }
+.dx-card {
+  display: block;
+  text-decoration: none;
+  border: 1px solid var(--dx-rule);
+  background: var(--dx-paper);
+  color: var(--dx-ink);
+  padding: 20px 20px 18px;
+}
+.dx-card__kicker {
+  font-family: var(--dx-font-dateline);
+  font-variant: var(--dx-dateline-caps);
+  font-size: 12.5px;
+  letter-spacing: 0.18em;
+  color: var(--dx-accent);
+  margin-bottom: 6px;
+}
+.dx-card__name {
+  font-family: var(--dx-font-masthead);
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 1.1;
+  margin: 0 0 8px;
+}
+.dx-card__tagline { font-family: var(--dx-font-body); font-size: 15.5px; margin: 0 0 12px; }
+.dx-card__chips { display: flex; gap: 6px; }
+.dx-card__chip { width: 26px; height: 26px; border: 1px solid var(--dx-rule); }
+.dx-card__cta {
+  font-family: var(--dx-font-dateline);
+  font-variant: var(--dx-dateline-caps);
+  font-size: 13.5px;
+  letter-spacing: 0.1em;
+  color: var(--dx-link);
+  margin-top: 12px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .dx-card { transition: transform 0.25s cubic-bezier(0.22, 0.61, 0.36, 1); }
+  .dx-card:hover { transform: translateY(-2px); }
+}
