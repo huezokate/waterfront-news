@@ -282,7 +282,8 @@
 .dx--d {
   --dx-paper: #232a33;
   --dx-ink: #eae5db;
-  --dx-accent: #ff6a3d;
+  --dx-accent: #da4c29; /* structural / large-type / UI — 3.48:1 (AA-large) */
+  --dx-accent-ink: #e96b45; /* same rust, readable at small sizes — 4.59:1 */
   --dx-link: #ffb03a;
   --dx-meta: #97a1ab;
   --dx-gold: #ffb03a;
@@ -305,7 +306,7 @@
   pointer-events: none;
   z-index: 0;
   background:
-    radial-gradient(120% 90% at 85% -10%, rgba(255, 106, 61, 0.2), transparent 55%),
+    radial-gradient(120% 90% at 85% -10%, rgba(218, 76, 41, 0.2), transparent 55%),
     radial-gradient(90% 80% at -15% 45%, rgba(59, 74, 107, 0.5), transparent 60%),
     radial-gradient(70% 60% at 110% 95%, rgba(255, 176, 58, 0.1), transparent 55%);
   transform-origin: 75% 0%;
@@ -331,12 +332,20 @@
 .dx--d .dx-card__cta { text-transform: uppercase; }
 .dx--d .dx-bar { font-size: 12.5px; letter-spacing: 0.14em; font-weight: 500; }
 
+/* Deep rust is AA only at large sizes — small accent text takes the readable tint */
+.dx--d .dx-dateline,
+.dx--d .dx-fleuron,
+.dx--d .dx-typelist dt,
+.dx--d .dx-swatch__ratio,
+.dx--d .dx-card__kicker,
+.dx--d .dx-plate__year { color: var(--dx-accent-ink); }
+
 /* The Direction A header, struck in signal fire */
 .dx--d .dx-masthead__name,
 .dx--d .dx-card__name {
   font-family: 'UnifrakturCook', system-ui, serif;
   color: var(--dx-accent);
-  text-shadow: 0 0 38px rgba(255, 106, 61, 0.4);
+  text-shadow: 0 0 38px rgba(218, 76, 41, 0.4);
 }
 .dx--d .dx-headline { font-weight: 700; letter-spacing: -0.015em; }
 .dx--d .dx-article p:first-of-type::first-letter { font-family: 'UnifrakturCook', serif; }
@@ -355,8 +364,8 @@
   height: 100%;
   transform: scaleX(0);
   transform-origin: 0 50%;
-  background: linear-gradient(90deg, #ff6a3d, #ffb03a);
-  box-shadow: 0 0 12px rgba(255, 106, 61, 0.55);
+  background: linear-gradient(90deg, #da4c29, #ffb03a);
+  box-shadow: 0 0 12px rgba(218, 76, 41, 0.55);
 }
 
 /* ── Scroll reveals (interactive directions; JS adds .is-in) ─────── */
@@ -390,15 +399,15 @@
 }
 .dx-living__frame.is-alive img { filter: none; }
 .dx-living__frame.is-alive {
-  border-color: rgba(255, 106, 61, 0.7);
-  box-shadow: 0 0 42px rgba(255, 106, 61, 0.3);
+  border-color: rgba(218, 76, 41, 0.7);
+  box-shadow: 0 0 42px rgba(218, 76, 41, 0.3);
 }
 .dx-living__frame::after {
   content: '';
   position: absolute;
   inset: 0;
   pointer-events: none;
-  border: 2px solid rgba(255, 106, 61, 0);
+  border: 2px solid rgba(218, 76, 41, 0);
 }
 @media (prefers-reduced-motion: no-preference) {
   .dx-living__frame { transition: transform 0.15s ease, box-shadow 0.5s ease, border-color 0.5s ease; }
@@ -406,8 +415,8 @@
   .dx-living__frame.is-alive::after { animation: dx-ignite 0.9s ease-out; }
 }
 @keyframes dx-ignite {
-  0% { border-color: rgba(255, 106, 61, 0.9); transform: scale(0.96); opacity: 1; }
-  100% { border-color: rgba(255, 106, 61, 0); transform: scale(1.04); opacity: 0; }
+  0% { border-color: rgba(218, 76, 41, 0.9); transform: scale(0.96); opacity: 1; }
+  100% { border-color: rgba(218, 76, 41, 0); transform: scale(1.04); opacity: 0; }
 }
 .dx-living__hint {
   position: absolute;
@@ -419,9 +428,9 @@
   font-weight: 500;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: #ff8a5f;
+  color: #e96b45;
   background: rgba(21, 25, 31, 0.72);
-  border: 1px solid rgba(255, 106, 61, 0.45);
+  border: 1px solid rgba(218, 76, 41, 0.45);
   backdrop-filter: blur(3px);
 }
 .dx-living__caption {
@@ -482,9 +491,9 @@
 }
 .dx-plate.is-picked {
   border-color: var(--dx-accent);
-  box-shadow: 0 0 0 1px var(--dx-accent), 0 0 28px rgba(255, 106, 61, 0.35);
+  box-shadow: 0 0 0 1px var(--dx-accent), 0 0 28px rgba(218, 76, 41, 0.35);
 }
-.dx-plate.is-picked .dx-plate__label { background: rgba(255, 106, 61, 0.14); }
+.dx-plate.is-picked .dx-plate__label { background: rgba(218, 76, 41, 0.14); }
 @media (prefers-reduced-motion: no-preference) {
   .dx-plate { transition: transform 0.2s ease, box-shadow 0.4s ease, border-color 0.4s ease; }
   .dx-plate:hover { transform: translateY(-2px); }
@@ -526,17 +535,17 @@
   letter-spacing: 0.12em;
   text-transform: uppercase;
   text-decoration: none;
-  color: #1a1d23;
-  background: linear-gradient(100deg, #ff6a3d, #ffb03a);
+  color: var(--dx-ink);
+  background: rgba(218, 76, 41, 0.16);
   border: 1px solid var(--dx-accent);
 }
 @media (prefers-reduced-motion: no-preference) {
   .dx-cta { transition: transform 0.2s ease, box-shadow 0.3s ease; }
-  .dx-cta:hover { transform: translateY(-2px); box-shadow: 0 0 34px rgba(255, 106, 61, 0.45); }
+  .dx-cta:hover { transform: translateY(-2px); box-shadow: 0 0 34px rgba(218, 76, 41, 0.45); }
   .dx-cta:active { transform: scale(0.97); }
 }
 
 /* Index card preview for D carries its own ember glow */
 .dx--d.dx-card {
-  background-image: radial-gradient(120% 130% at 85% -20%, rgba(255, 106, 61, 0.18), transparent 60%);
+  background-image: radial-gradient(120% 130% at 85% -20%, rgba(218, 76, 41, 0.18), transparent 60%);
 }
