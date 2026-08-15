@@ -17,7 +17,7 @@ export default function Directions() {
         <header className="dx-masthead">
           <div className="dx-masthead__kicker">TimeLens · Waterfront</div>
           <h1 className="dx-masthead__name" style={{ fontFamily: 'var(--dx-font-display)' }}>
-            Victorian Newspaper — Three Directions
+            Victorian Newspaper — Four Directions
           </h1>
           <div className="dx-masthead__rule">
             <span className="dx-fleuron">❦</span> Pick one before the design system is built{' '}
@@ -26,10 +26,12 @@ export default function Directions() {
         </header>
 
         <p style={{ margin: '20px 0 0', textAlign: 'center' }}>
-          Three distinct, WCAG 2.2 AA-verified directions. All share the same skeleton — single
-          cream column, printer's-rule timeline, living-image hero, drop-cap article blocks —
+          Four distinct, WCAG 2.2 AA-verified directions. All share the same skeleton — single
+          column, printer's-rule timeline, living-image hero, drop-cap article blocks —
           and differ in <strong>type personality, palette warmth, and ornament level</strong>.
-          Each page below renders live in its own fonts and colors.
+          Direction D adds the stakeholder round-2 asks: living slate ground, signal-fire
+          accents, scroll motion, and a tap-to-ignite image. Each page below renders live in
+          its own fonts and colors.
         </p>
 
         <div className="dxi-cards">
@@ -38,6 +40,7 @@ export default function Directions() {
               <div className="dx-card__kicker">
                 Direction {d.letter}
                 {d.recommended && ' · ★ recommended'}
+                {d.badge && ` · ${d.badge}`}
               </div>
               <h2 className="dx-card__name">{d.name}</h2>
               <p className="dx-card__tagline">{d.tagline}</p>

@@ -1,0 +1,296 @@
+/* ============================================================================
+   TimeLens — Yerba Buena prototype (Direction D "The Night Dispatch")
+   Browse masonry + chapter pages. Theme vars come from .dx--d in directions.css;
+   this file only styles the .nx-* prototype components.
+   ============================================================================ */
+
+/* ── Browse: masonry of plates ───────────────────────────────────── */
+.nx-masonry {
+  margin-top: 22px;
+  columns: 2;
+  column-gap: 12px;
+}
+@media (min-width: 680px) {
+  .nx-masonry { columns: 3; }
+}
+.nx-stack {
+  display: block;
+  break-inside: avoid;
+  margin-bottom: 12px;
+  border: 1px solid var(--dx-rule);
+  background: rgba(21, 25, 31, 0.55);
+  text-decoration: none;
+  color: var(--dx-ink);
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+}
+.nx-stack img {
+  display: block;
+  width: 100%;
+  filter: saturate(1.25) contrast(1.12); /* bright & contrast, per the notes */
+}
+.nx-stack__year {
+  display: block;
+  padding: 9px 10px 0;
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--dx-accent);
+}
+.nx-stack__title {
+  display: block;
+  padding: 1px 10px 0;
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-size: 12.5px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.nx-stack__guide {
+  display: block;
+  padding: 3px 10px 10px;
+  font-size: 11.5px;
+  color: var(--dx-meta);
+  font-style: italic;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .nx-stack { transition: transform 0.2s ease, box-shadow 0.4s ease, border-color 0.4s ease; }
+  .nx-stack:hover { transform: translateY(-2px); border-color: rgba(255, 106, 61, 0.5); }
+  .nx-stack:active { transform: scale(0.97); }
+  /* camera-stopped blur applies to the masonry while scrolling */
+  .dx--d .nx-stack img { transition: filter 0.45s cubic-bezier(0.22, 0.61, 0.36, 1); }
+  .dx--d.is-scrolling .nx-stack img {
+    filter: saturate(1.25) contrast(1.12) blur(7px);
+    transition-duration: 0.2s;
+  }
+}
+
+/* ── Chapter header ──────────────────────────────────────────────── */
+.nx-head {
+  text-align: center;
+  padding: 24px 8px 6px;
+}
+.nx-head__years {
+  margin: 0 0 4px;
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--dx-link);
+}
+.nx-head__title {
+  margin: 0 0 8px;
+  font-family: 'UnifrakturCook', system-ui, serif;
+  font-weight: 700;
+  font-size: clamp(30px, 8vw, 48px);
+  line-height: 1.08;
+  color: var(--dx-accent);
+  text-shadow: 0 0 38px rgba(255, 106, 61, 0.4);
+}
+.nx-head__byline {
+  margin: 0;
+  font-size: 13.5px;
+  color: var(--dx-meta);
+}
+.nx-head__byline strong { color: var(--dx-ink); font-weight: 500; }
+
+/* ── "Video": living plate stand-in ──────────────────────────────── */
+.nx-video { margin: 18px 0 0; }
+.nx-video__frame {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 1px solid var(--dx-rule);
+  background: none;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+}
+.nx-video__frame img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  filter: saturate(1.15) contrast(1.1);
+}
+.nx-video__chip {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  padding: 5px 10px;
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-size: 11.5px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #ff8a5f;
+  background: rgba(21, 25, 31, 0.72);
+  border: 1px solid rgba(255, 106, 61, 0.45);
+  backdrop-filter: blur(3px);
+}
+.nx-video__caption {
+  margin-top: 8px;
+  font-size: 12.5px;
+  color: var(--dx-meta);
+  text-align: center;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .nx-video__frame img { animation: nx-kenburns 7s ease-in-out infinite alternate; }
+  .nx-video__frame.is-paused img { animation-play-state: paused; }
+}
+@keyframes nx-kenburns {
+  0% { transform: scale(1); filter: sepia(0.45) saturate(0.5) contrast(1.05); }
+  35% { filter: saturate(1.2) contrast(1.1); }
+  100% { transform: scale(1.14) translate(-2.5%, -1.8%); filter: saturate(1.25) contrast(1.12); }
+}
+
+/* ── Guide chat ──────────────────────────────────────────────────── */
+.nx-chat {
+  margin-top: 30px;
+  border: 1px solid var(--dx-rule);
+  background: rgba(21, 25, 31, 0.55);
+}
+.nx-chat__head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--dx-rule);
+}
+.nx-chat__avatar {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid var(--dx-accent);
+  color: var(--dx-accent);
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  background: rgba(255, 106, 61, 0.1);
+}
+.nx-chat__head > div { flex: 1; min-width: 0; }
+.nx-chat__name {
+  margin: 0;
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.nx-chat__sub { margin: 1px 0 0; font-size: 12px; color: var(--dx-meta); }
+
+.nx-audio {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--dx-rule);
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: var(--dx-link);
+}
+.nx-audio__bars { display: inline-flex; align-items: flex-end; gap: 2px; height: 16px; }
+.nx-audio__bars i {
+  width: 3px;
+  height: 100%;
+  background: var(--dx-accent);
+  transform-origin: bottom;
+  transform: scaleY(0.3);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .nx-audio__bars i { animation: nx-eq 0.9s ease-in-out infinite alternate; }
+  .nx-audio__bars i:nth-child(2) { animation-delay: 0.15s; }
+  .nx-audio__bars i:nth-child(3) { animation-delay: 0.3s; }
+  .nx-audio__bars i:nth-child(4) { animation-delay: 0.45s; }
+  .nx-audio__bars i:nth-child(5) { animation-delay: 0.6s; }
+}
+@keyframes nx-eq {
+  from { transform: scaleY(0.2); }
+  to { transform: scaleY(1); }
+}
+
+.nx-chat__log {
+  max-height: 300px;
+  overflow-y: auto;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.nx-chat__empty { margin: 0; font-size: 13.5px; color: var(--dx-meta); font-style: italic; }
+.nx-msg {
+  margin: 0;
+  max-width: 86%;
+  padding: 8px 12px;
+  font-size: 14.5px;
+  line-height: 1.5;
+  border: 1px solid var(--dx-rule);
+  background: rgba(234, 229, 219, 0.06);
+}
+.nx-msg--user {
+  align-self: flex-end;
+  border-color: rgba(255, 106, 61, 0.5);
+  background: rgba(255, 106, 61, 0.12);
+}
+.nx-msg--typing { font-style: italic; color: var(--dx-meta); background: none; border-style: dashed; }
+
+.nx-chat__row {
+  display: flex;
+  gap: 8px;
+  padding: 12px 14px;
+  border-top: 1px solid var(--dx-rule);
+}
+.nx-chat__input {
+  flex: 1;
+  min-width: 0;
+  padding: 0 12px;
+  height: 48px;
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-size: 14.5px;
+  color: var(--dx-ink);
+  background: rgba(21, 25, 31, 0.7);
+  border: 1px solid var(--dx-rule);
+}
+.nx-chat__input::placeholder { color: var(--dx-meta); }
+.nx-chat__input:focus-visible { outline: 2.5px solid var(--dx-link); outline-offset: 2px; }
+
+.nx-iconbtn {
+  flex: none;
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 1px solid var(--dx-rule);
+  background: none;
+  color: var(--dx-accent);
+  cursor: pointer;
+  position: relative;
+  -webkit-tap-highlight-color: transparent;
+}
+.nx-chat__head .nx-iconbtn { width: 44px; height: 44px; }
+.nx-iconbtn--send { border-color: var(--dx-accent); background: rgba(255, 106, 61, 0.12); }
+.nx-iconbtn.is-on { background: rgba(255, 106, 61, 0.2); border-color: var(--dx-accent); }
+.nx-iconbtn.is-live { border-color: var(--dx-accent); }
+@media (prefers-reduced-motion: no-preference) {
+  .nx-iconbtn:active { transform: scale(0.94); }
+  .nx-iconbtn.is-live::after {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border: 2px solid rgba(255, 106, 61, 0.7);
+    animation: nx-pulse 1.2s ease-out infinite;
+  }
+}
+@keyframes nx-pulse {
+  from { transform: scale(1); opacity: 1; }
+  to { transform: scale(1.35); opacity: 0; }
+}

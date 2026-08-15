@@ -272,3 +272,271 @@
   .dx-card { transition: transform 0.25s cubic-bezier(0.22, 0.61, 0.36, 1); }
   .dx-card:hover { transform: translateY(-2px); }
 }
+
+/* ============================================================================
+   Direction D — The Night Dispatch (stakeholder round 2)
+   A's blackletter masthead in signal fire on breathing slate; everything else
+   modern grotesque. Motion is the ornament: scroll progress, reveals,
+   tap-to-ignite living image.
+   ============================================================================ */
+.dx--d {
+  --dx-paper: #232a33;
+  --dx-ink: #eae5db;
+  --dx-accent: #ff6a3d;
+  --dx-link: #ffb03a;
+  --dx-meta: #97a1ab;
+  --dx-gold: #ffb03a;
+  --dx-rule: rgba(234, 229, 219, 0.26);
+  --dx-font-display: 'Space Grotesk', system-ui, sans-serif;
+  --dx-font-body: 'Space Grotesk', system-ui, sans-serif;
+  --dx-font-dateline: 'Space Grotesk', system-ui, sans-serif;
+  --dx-dateline-caps: normal;
+  --dx-leading: 1.6;
+  font-size: 16.5px;
+  position: relative;
+}
+
+/* Living slate: layered ember + indigo radial glows on a fixed sheet behind
+   the page, slowly breathing. */
+.dx--d::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(120% 90% at 85% -10%, rgba(255, 106, 61, 0.2), transparent 55%),
+    radial-gradient(90% 80% at -15% 45%, rgba(59, 74, 107, 0.5), transparent 60%),
+    radial-gradient(70% 60% at 110% 95%, rgba(255, 176, 58, 0.1), transparent 55%);
+  transform-origin: 75% 0%;
+}
+.dx--d .dx-page { position: relative; z-index: 1; }
+@media (prefers-reduced-motion: no-preference) {
+  .dx--d::before { animation: dx-breathe 14s ease-in-out infinite; }
+}
+@keyframes dx-breathe {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.06); }
+}
+
+/* Modern label voice: grotesque runs uppercase where the serifs ran small-caps */
+.dx--d .dx-bar,
+.dx--d .dx-masthead__kicker,
+.dx--d .dx-masthead__rule,
+.dx--d .dx-dateline,
+.dx--d .dx-section__title,
+.dx--d .dx-typelist dt,
+.dx--d .dx-foot,
+.dx--d .dx-card__kicker,
+.dx--d .dx-card__cta { text-transform: uppercase; }
+.dx--d .dx-bar { font-size: 12.5px; letter-spacing: 0.14em; font-weight: 500; }
+
+/* The Direction A header, struck in signal fire */
+.dx--d .dx-masthead__name,
+.dx--d .dx-card__name {
+  font-family: 'UnifrakturCook', system-ui, serif;
+  color: var(--dx-accent);
+  text-shadow: 0 0 38px rgba(255, 106, 61, 0.4);
+}
+.dx--d .dx-headline { font-weight: 700; letter-spacing: -0.015em; }
+.dx--d .dx-article p:first-of-type::first-letter { font-family: 'UnifrakturCook', serif; }
+
+/* ── Scroll progress bar (fire gradient) ─────────────────────────── */
+.dx-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  z-index: 40;
+  background: rgba(234, 229, 219, 0.08);
+}
+.dx-progress__bar {
+  height: 100%;
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  background: linear-gradient(90deg, #ff6a3d, #ffb03a);
+  box-shadow: 0 0 12px rgba(255, 106, 61, 0.55);
+}
+
+/* ── Scroll reveals (interactive directions; JS adds .is-in) ─────── */
+@media (prefers-reduced-motion: no-preference) {
+  .dx--d .dx-reveal {
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+  .dx--d .dx-reveal.is-in { opacity: 1; transform: none; }
+}
+
+/* ── Tap-to-ignite living image ──────────────────────────────────── */
+.dx-living { margin: 0; }
+.dx-living__frame {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 1px solid var(--dx-rule);
+  background: none;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+}
+.dx-living__frame img {
+  display: block;
+  width: 100%;
+  filter: saturate(0.12) sepia(0.35) contrast(1.05) brightness(0.88);
+  transition: filter 0.8s ease;
+}
+.dx-living__frame.is-alive img { filter: none; }
+.dx-living__frame.is-alive {
+  border-color: rgba(255, 106, 61, 0.7);
+  box-shadow: 0 0 42px rgba(255, 106, 61, 0.3);
+}
+.dx-living__frame::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border: 2px solid rgba(255, 106, 61, 0);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .dx-living__frame { transition: transform 0.15s ease, box-shadow 0.5s ease, border-color 0.5s ease; }
+  .dx-living__frame:active { transform: scale(0.985); }
+  .dx-living__frame.is-alive::after { animation: dx-ignite 0.9s ease-out; }
+}
+@keyframes dx-ignite {
+  0% { border-color: rgba(255, 106, 61, 0.9); transform: scale(0.96); opacity: 1; }
+  100% { border-color: rgba(255, 106, 61, 0); transform: scale(1.04); opacity: 0; }
+}
+.dx-living__hint {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  padding: 5px 10px;
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-size: 11.5px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #ff8a5f;
+  background: rgba(21, 25, 31, 0.72);
+  border: 1px solid rgba(255, 106, 61, 0.45);
+  backdrop-filter: blur(3px);
+}
+.dx-living__caption {
+  margin-top: 10px;
+  font-size: 13px;
+  color: var(--dx-meta);
+  text-align: center;
+}
+
+/* ── Grid-of-plates picker (location + year, from the sketches) ──── */
+.dx-plates-intro {
+  margin: 0 0 16px;
+  color: var(--dx-meta);
+  font-size: 14.5px;
+}
+.dx-plates {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+.dx-plate {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 1px solid var(--dx-rule);
+  background: rgba(21, 25, 31, 0.55);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  text-align: left;
+  -webkit-tap-highlight-color: transparent;
+}
+.dx-plate img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  /* "bright and contrast, color saturated imagery" */
+  filter: saturate(1.25) contrast(1.12);
+}
+.dx-plate__label {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+  padding: 8px 10px 9px;
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--dx-ink);
+}
+.dx-plate__year {
+  font-weight: 700;
+  color: var(--dx-accent);
+  letter-spacing: 0.06em;
+}
+.dx-plate.is-picked {
+  border-color: var(--dx-accent);
+  box-shadow: 0 0 0 1px var(--dx-accent), 0 0 28px rgba(255, 106, 61, 0.35);
+}
+.dx-plate.is-picked .dx-plate__label { background: rgba(255, 106, 61, 0.14); }
+@media (prefers-reduced-motion: no-preference) {
+  .dx-plate { transition: transform 0.2s ease, box-shadow 0.4s ease, border-color 0.4s ease; }
+  .dx-plate:hover { transform: translateY(-2px); }
+  .dx-plate:active { transform: scale(0.97); }
+}
+
+/* Wireframe: text left, grid of pix right, once there's room */
+@media (min-width: 680px) {
+  .dx-plates-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 22px;
+    align-items: start;
+  }
+  .dx-plates-wrap .dx-plates-intro { margin: 0; }
+  .dx-plates-wrap .dx-plates { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* ── "Blur the pic, as if camera stopped" ────────────────────────── */
+@media (prefers-reduced-motion: no-preference) {
+  .dx--d .dx-plate img,
+  .dx--d .dx-living__frame img {
+    transition: filter 0.45s cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+  .dx--d.is-scrolling .dx-plate img { filter: saturate(1.25) contrast(1.12) blur(7px); transition-duration: 0.2s; }
+  .dx--d.is-scrolling .dx-living__frame img { filter: saturate(0.12) sepia(0.35) contrast(1.05) brightness(0.88) blur(7px); transition-duration: 0.2s; }
+  .dx--d.is-scrolling .dx-living__frame.is-alive img { filter: blur(7px); }
+}
+
+/* ── Prototype CTA (Direction D → Yerba Buena flow) ──────────────── */
+.dx-cta-wrap { margin-top: 30px; text-align: center; }
+.dx-cta {
+  display: inline-block;
+  padding: 14px 22px;
+  min-height: 48px;
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #1a1d23;
+  background: linear-gradient(100deg, #ff6a3d, #ffb03a);
+  border: 1px solid var(--dx-accent);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .dx-cta { transition: transform 0.2s ease, box-shadow 0.3s ease; }
+  .dx-cta:hover { transform: translateY(-2px); box-shadow: 0 0 34px rgba(255, 106, 61, 0.45); }
+  .dx-cta:active { transform: scale(0.97); }
+}
+
+/* Index card preview for D carries its own ember glow */
+.dx--d.dx-card {
+  background-image: radial-gradient(120% 130% at 85% -20%, rgba(255, 106, 61, 0.18), transparent 60%);
+}

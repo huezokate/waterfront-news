@@ -13,6 +13,8 @@ export interface Direction {
   letter: string;
   name: string;
   recommended?: boolean;
+  badge?: string; // extra kicker label, e.g. stakeholder-feedback round
+  interactive?: boolean; // renders the living-image + scroll-motion specimen extras
   tagline: string;
   summary: string;
   type: { role: string; spec: string }[];
@@ -26,7 +28,6 @@ export const DIRECTIONS: Direction[] = [
     id: 'a',
     letter: 'A',
     name: 'The Authentic Broadsheet',
-    recommended: true,
     tagline: 'The grittiest, most period-true. Looks like a genuine 1850s San Francisco newspaper.',
     summary:
       'Blackletter nameplate + IM Fell body + vermilion accent reads instantly as a 19th-century ' +
@@ -95,5 +96,41 @@ export const DIRECTIONS: Direction[] = [
     risk:
       'Sepia-heavy ground is slightly tighter on contrast (verify accents on #EDE4D3); ' +
       'can feel "antique store" rather than "living newspaper."',
+  },
+  {
+    id: 'd',
+    letter: 'D',
+    name: 'The Night Dispatch',
+    recommended: true,
+    badge: '✦ stakeholder round 2',
+    interactive: true,
+    tagline:
+      'Direction A’s masthead struck in signal-fire red on living slate — vibrant, edgy, ' +
+      'fresh, and built to move.',
+    summary:
+      'The broadsheet after dark: A’s blackletter header survives, everything under it goes ' +
+      'modern. Slate ground with breathing ember gradients, red-orange UI accents, ' +
+      'scroll-driven reveals, a tap-to-ignite living image with a haptic tick, a bright ' +
+      'grid-of-plates picker for location + year, and imagery that blurs in motion and snaps ' +
+      'into focus when the camera stops. Audience: adults with kids — rich, daring, ' +
+      'form follows function; high contrast but earthy; color-saturated imagery.',
+    type: [
+      { role: 'Masthead', spec: 'UnifrakturCook — Direction A’s header, recolored signal fire' },
+      { role: 'Body & UI', spec: 'Space Grotesk @ 16.5px / 1.6 — modern grotesque, edgy vs. blackletter' },
+      { role: 'Datelines', spec: 'Space Grotesk 500, uppercase, letter-spaced' },
+    ],
+    palette: [
+      { name: 'Slate night', hex: '#232A33', role: 'ground' },
+      { name: 'Newsprint ghost', hex: '#EAE5DB', role: 'text', ratio: '11.53:1' },
+      { name: 'Signal fire', hex: '#FF6A3D', role: 'accent', ratio: '5.09:1' },
+      { name: 'Ember amber', hex: '#FFB03A', role: 'links / alive states', ratio: '7.94:1' },
+      { name: 'Slate mist', hex: '#97A1AB', role: 'meta', ratio: '5.52:1' },
+    ],
+    ornament:
+      'Low print-ornament, high atmosphere — radial ember glows, fire-gradient scroll bar, ' +
+      'motion as the ornament.',
+    risk:
+      'Furthest from period-true; dark ground must not drift back to the legacy steel-blue app. ' +
+      'Haptics (navigator.vibrate) are Android-only — iOS falls back to the visual pulse.',
   },
 ];

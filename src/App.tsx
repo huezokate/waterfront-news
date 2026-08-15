@@ -9,6 +9,8 @@ import Waterfront from './pages/Waterfront';
 import Library from './pages/Library';
 import Directions from './pages/Directions';
 import Direction from './pages/Direction';
+import NightYerbaBuena from './pages/NightYerbaBuena';
+import NightEvent from './pages/NightEvent';
 
 // SVG grain filter — defined once here, referenced throughout the app via url(#grain)
 function GrainFilter() {
@@ -49,6 +51,8 @@ export default function App() {
         <Route path="/library" element={<Library />} />
         <Route path="/directions" element={<Directions />} />
         <Route path="/directions/:id" element={<Direction />} />
+        <Route path="/night/yerba-buena" element={<NightYerbaBuena />} />
+        <Route path="/night/yerba-buena/:id" element={<NightEvent />} />
         <Route path="/yerba-buena" element={<YerbaBuena />} />
         <Route path="/scan" element={<Scan />} />
       </Routes>
