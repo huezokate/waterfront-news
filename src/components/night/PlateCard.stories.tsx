@@ -35,6 +35,27 @@ export const TallImage: Story = {
   },
 };
 
+/** The browse grid at desktop width: three columns, three chapters each, so
+    the trail still reads chronologically down each column. */
+export const GridOnDesktop: Story = {
+  parameters: { frame: false },
+  decorators: [(Story) => <Story />],
+  render: () => (
+    <MasonryGrid>
+      {YERBA_BUENA_EVENTS.map((e, i) => (
+        <PlateCard
+          key={e.id}
+          to={`/night/yerba-buena/${e.id}`}
+          image={e.image}
+          years={e.years}
+          title={e.title}
+          delayMs={(i % 3) * 60}
+        />
+      ))}
+    </MasonryGrid>
+  ),
+};
+
 /** The whole browse grid — this is the screen the reader lands on. */
 export const InTheGrid: Story = {
   decorators: [(Story) => <Story />],

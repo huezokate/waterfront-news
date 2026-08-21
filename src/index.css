@@ -87,6 +87,14 @@ body {
   box-shadow: 0 0 40px rgba(74, 75, 77, 0.1);
 }
 
+/* Routes that bring their own responsive layout (Direction D) escape the
+   phone frame. Nothing inside them may bleed to 100vw — see night.css. */
+.app-shell--wide {
+  max-width: none;
+  background: none;
+  box-shadow: none;
+}
+
 /* Keep the grain filter host but hide it */
 .grain-filter-host {
   position: absolute;

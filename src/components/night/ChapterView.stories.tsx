@@ -48,3 +48,15 @@ export const LastChapter: Story = { args: neighbours('railroad') };
 
 /** Longest dispatch against the shortest, to check the column at both extremes. */
 export const LongestDispatch: Story = { args: neighbours('silver-war') };
+
+/** Desktop. `frame: false` drops the 430px phone shell the way the /night
+    routes do in the real app (see .app-shell--wide). The dispatch moves left,
+    the pick and the conversation become a rail on the right, and the drill-down
+    secondaries share a row under the wide archive card.
+
+    Widen the Storybook viewport past 1000px to see it — below that the story
+    renders the phone layout, which is the same thing the app does. */
+export const Desktop: Story = {
+  parameters: { frame: false },
+  args: neighbours('fire-vigilance'),
+};

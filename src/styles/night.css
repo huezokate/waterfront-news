@@ -14,7 +14,11 @@
   --nx-trade: #da4c29;
   --nx-street: #7e9bd4;
   --nx-plate: rgba(21, 25, 31, 0.55);
+  /* .dx-page's side padding. The landscape cancels exactly this much to bleed
+     to the column edge, so the two must never drift apart. */
+  --nx-gutter: 20px;
 }
+.nx .dx-page { padding-left: var(--nx-gutter); padding-right: var(--nx-gutter); }
 
 /* ── Browse: masonry of plates ───────────────────────────────────── */
 .nx-masonry {
@@ -127,7 +131,7 @@
    would build an element far wider than the frame and get sliced. The negative
    margin simply cancels .dx-page's 20px padding at any width. */
 .nx-land {
-  margin: 10px -20px 0;
+  margin: 10px calc(-1 * var(--nx-gutter)) 0;
 }
 .nx-land__frame {
   position: relative;
@@ -710,4 +714,110 @@
   background: rgba(21, 25, 31, 0.7);
   color: var(--dx-ink);
   cursor: pointer;
+}
+
+/* ============================================================================
+   Desktop
+   ----------------------------------------------------------------------------
+   The night routes leave the 430px .app-shell behind (see .app-shell--wide in
+   index.css) and lay out for real. The rule that still holds at every width:
+   nothing bleeds to 100vw — the landscape bleeds to the COLUMN, which is why
+   the gutter is a token.
+   ============================================================================ */
+
+/* ── Tablet: the grid starts breathing ───────────────────────────── */
+@media (min-width: 720px) {
+  .nx { --nx-gutter: 28px; }
+  .nx .dx-page { max-width: 900px; }
+  .nx-masonry { column-gap: 16px; }
+  .nx-stack { margin-bottom: 16px; }
+  .nx-archive__grid { columns: 3; column-gap: 12px; }
+  .nx-plate { margin-bottom: 12px; }
+}
+
+/* ── Desktop: the dispatch on the left, the teller in a rail on the right ── */
+@media (min-width: 1000px) {
+  .nx { --nx-gutter: 40px; }
+  .nx .dx-page { max-width: 1240px; padding-bottom: 110px; }
+
+  .nx-land__frame { aspect-ratio: 21 / 9; max-height: 64vh; }
+  .nx-land__plate { left: 44px; right: 44px; bottom: 34px; }
+  .nx-land__title { font-size: clamp(44px, 4.4vw, 68px); }
+  .nx-land__years { font-size: 14px; }
+  .nx-land__credit { font-size: 15px; }
+  .nx-land__toggle { right: 22px; top: 22px; }
+
+  /* Row 1 auto, row 2 taking the slack, so the conversation has somewhere to
+     slide as the reader works down the dispatch. */
+  .nx-body {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(330px, 400px);
+    grid-template-rows: auto 1fr;
+    column-gap: 44px;
+    margin-top: 8px;
+  }
+  .nx-body__story {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    margin-top: 30px;
+    font-size: 1.03em;
+  }
+  .nx-body__pick { grid-column: 2; grid-row: 1; }
+  .nx-body__ask {
+    grid-column: 2;
+    grid-row: 2;
+    align-self: start;
+    position: sticky;
+    top: 18px;
+  }
+  .nx-heroes { margin-top: 30px; }
+  .nx-chat { margin-top: 22px; }
+  .nx-chat__log { max-height: 340px; }
+
+  /* Below the fold both sections run the full width. */
+  .nx-timeline { margin-top: 54px; }
+  .nx-drills { margin-top: 54px; }
+  .nx-timeline__row { gap: 16px; }
+  .nx-step__thumb { width: 132px; }
+
+  /* The archive stays wide and primary; the three secondaries share a row. */
+  .nx-drills__stack {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+  }
+  .nx-archive { grid-column: 1 / -1; }
+  .nx-drills__stack > .nx-drill {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .nx-drills__stack > .nx-drill .nx-drill__thumb {
+    width: auto;
+    aspect-ratio: 16 / 9;
+    border-right: 0;
+    border-bottom: 1px solid var(--dx-rule);
+  }
+  .nx-drills__stack > .nx-drill .nx-drill__body { padding: 14px 16px 16px; }
+
+  /* The archive card keeps the horizontal shape it has on a phone, just wider. */
+  .nx-archive .nx-drill { flex-direction: row; align-items: stretch; }
+  .nx-archive .nx-drill__thumb {
+    width: 260px;
+    aspect-ratio: auto;
+    border-right: 1px solid var(--dx-rule);
+    border-bottom: 0;
+  }
+  .nx-archive .nx-drill__body { padding: 20px 22px 20px 0; gap: 5px; }
+  .nx-archive .nx-drill__title { font-size: 20px; }
+  .nx-archive .nx-drill__blurb { font-size: 14px; max-width: 62ch; }
+  .nx-archive__grid { columns: 4; column-gap: 16px; margin-top: 16px; }
+  .nx-plate { margin-bottom: 16px; }
+
+  /* The browse masthead can afford to be a poster at this size. */
+  .nx .dx-masthead__name { font-size: clamp(56px, 6vw, 92px); }
+  .nx-masonry { columns: 3; column-gap: 22px; }
+  .nx-stack { margin-bottom: 22px; }
+
+  .nx-lightbox { padding: 64px 48px 32px; }
+  .nx-lightbox__img { max-height: 78vh; }
 }

@@ -30,6 +30,16 @@
   (grid items default to `min-width: auto`); and a `100vw` full-bleed built an element far wider
   than the 430px `.app-shell` and got sliced — the landscape now bleeds to the *column*.
 
+- **Desktop layout.** The `/night` and `/directions` routes now escape the legacy 430px
+  `.app-shell` (`app-shell--wide`, set from the route in `App.tsx`). Three breakpoints:
+  phone (one column), ≥720 (wider column, 3-up archive drawer), ≥1000 (1240px page, landscape
+  at 21:9 capped to 64vh, chapter body becomes **dispatch left / pick + chat rail right** with
+  the chat sticky so it follows the reader, timeline and drill-down full width, the three
+  secondary drill cards in a row under the wide archive card, browse masonry at 3 columns —
+  nine chapters divide evenly, so each column is a clean run of three).
+  `--nx-gutter` is a token because the landscape's negative margin has to cancel exactly the
+  padding `.dx-page` applies at that breakpoint.
+
 ### Not built (deliberately)
 - No audio walk, historian reaction or making-of film exists yet. Those cards render as
   `pending` — dashed, "not yet recorded", not clickable — rather than faking a working link.

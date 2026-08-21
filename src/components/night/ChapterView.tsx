@@ -89,21 +89,27 @@ export default function ChapterView({
         credit={`told by ${hero.name}`}
       />
 
-      <div className="dx-reveal">
-        <HeroSelect heroes={cast} selectedId={hero.id} onSelect={setHeroId} />
-      </div>
+      {/* One column on a phone — select, then read, then ask. Two on a desktop:
+          the dispatch on the left, the pick and the conversation in a rail on
+          the right that follows you down the story. Explicit grid placement,
+          so the source order stays right for mobile and for a screen reader. */}
+      <div className="nx-body">
+        <div className="nx-body__pick dx-reveal">
+          <HeroSelect heroes={cast} selectedId={hero.id} onSelect={setHeroId} />
+        </div>
 
-      <article className="dx-article nx-telling dx-reveal">
-        <p className="dx-dateline">{event.years} — {event.title}</p>
-        <p className="nx-telling__lens">{activeCast.lens}</p>
-        {event.script.map((p) => (
-          <p key={p.slice(0, 24)}>{p}</p>
-        ))}
-        <span className="dx-end" aria-hidden="true">⁂</span>
-      </article>
+        <article className="dx-article nx-telling nx-body__story dx-reveal">
+          <p className="dx-dateline">{event.years} — {event.title}</p>
+          <p className="nx-telling__lens">{activeCast.lens}</p>
+          {event.script.map((p) => (
+            <p key={p.slice(0, 24)}>{p}</p>
+          ))}
+          <span className="dx-end" aria-hidden="true">⁂</span>
+        </article>
 
-      <div className="dx-reveal">
-        <HeroChat hero={hero} years={event.years} clipTitle={event.title} />
+        <div className="nx-body__ask dx-reveal">
+          <HeroChat hero={hero} years={event.years} clipTitle={event.title} />
+        </div>
       </div>
 
       <section className="nx-timeline dx-reveal" aria-label="Move along the trail">

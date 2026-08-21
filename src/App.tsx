@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import Home from './pages/Home';
 import Group from './pages/Group';
 import Location from './pages/Location';
@@ -39,8 +39,13 @@ function GrainFilter() {
 }
 
 export default function App() {
+  // .app-shell caps the legacy app at a 430px phone frame. The Direction D
+  // routes have their own responsive layout and need the whole window.
+  const { pathname } = useLocation();
+  const wide = pathname.startsWith('/night') || pathname.startsWith('/directions');
+
   return (
-    <div className="app-shell">
+    <div className={`app-shell${wide ? ' app-shell--wide' : ''}`}>
       <GrainFilter />
       <Routes>
         <Route path="/" element={<Home />} />
