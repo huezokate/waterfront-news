@@ -16,7 +16,7 @@ const meta = {
       mapping: HEROES,
       control: { type: 'select' },
     },
-    size: { control: { type: 'inline-radio' }, options: ['xs', 'sm', 'lg'] },
+    size: { control: { type: 'inline-radio' }, options: ['sm', 'lg'] },
   },
 } satisfies Meta<typeof HeroAvatar>;
 
@@ -53,7 +53,7 @@ export const Standings: Story = {
 export const Sizes: Story = {
   render: () => (
     <div style={{ display: 'grid', gap: 22, padding: '24px 0' }}>
-      {(['xs', 'sm', 'lg'] as const).map((size) => (
+      {(['sm', 'lg'] as const).map((size) => (
         <div key={size} style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
           <HeroAvatar hero={HEROES.norton} size={size} />
           <HeroAvatar hero={HEROES.norton} size={size} selected />

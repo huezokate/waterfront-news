@@ -2,11 +2,10 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import PlateCard from './PlateCard';
 import MasonryGrid from './MasonryGrid';
 import { YERBA_BUENA_EVENTS } from '../../data/nightYerbaBuena';
-import { heroById } from '../../data/heroes';
 
-/* The browse tile. Picture and date together are the tap target; the three
-   small faces underneath are the only place the mechanic shows before you
-   open a chapter. */
+/* The browse tile. Picture, year, title — the picture and the date together
+   are the tap target. Who tells the chapter stays off the grid; you meet them
+   on the chapter page. */
 
 const first = YERBA_BUENA_EVENTS[0];
 
@@ -18,7 +17,6 @@ const meta = {
     image: first.image,
     years: first.years,
     title: first.title,
-    heroes: first.heroes.map((c) => heroById(c.heroId)),
   },
   decorators: [(Story) => <div style={{ maxWidth: 220, paddingTop: 20 }}><Story /></div>],
 } satisfies Meta<typeof PlateCard>;
@@ -49,7 +47,6 @@ export const InTheGrid: Story = {
           image={e.image}
           years={e.years}
           title={e.title}
-          heroes={e.heroes.map((c) => heroById(c.heroId))}
           delayMs={(i % 3) * 60}
         />
       ))}

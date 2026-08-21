@@ -7,7 +7,7 @@ import { asset } from '../../lib/asset';
    `hero.figurine`, this component swaps to it everywhere at once — grid teaser,
    hero select, chat header, audio tour — so no other file needs to change. */
 
-export type HeroAvatarSize = 'xs' | 'sm' | 'lg';
+export type HeroAvatarSize = 'sm' | 'lg';
 
 export interface HeroAvatarProps {
   hero: Hero;

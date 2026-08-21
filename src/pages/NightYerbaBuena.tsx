@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import '../styles/directions.css';
 import '../styles/night.css';
 import { YERBA_BUENA_EVENTS } from '../data/nightYerbaBuena';
-import { heroById } from '../data/heroes';
 import { useCameraFocus, useScrollReveal } from '../lib/nightFx';
 import ScrollProgress from '../components/ScrollProgress';
 import MasonryGrid from '../components/night/MasonryGrid';
@@ -27,7 +26,7 @@ export default function NightYerbaBuena() {
           <div className="dx-masthead__kicker">TimeLens · Chapter One of the Trail</div>
           <h1 className="dx-masthead__name">Yerba Buena Cove</h1>
           <div className="dx-masthead__rule">
-            <span className="dx-fleuron">❦</span> 1833–1870 · Nine chapters · Three tellers each{' '}
+            <span className="dx-fleuron">❦</span> 1833–1870 · Nine chapters · Tap a plate{' '}
             <span className="dx-fleuron">❦</span>
           </div>
         </header>
@@ -40,7 +39,6 @@ export default function NightYerbaBuena() {
               image={e.image}
               years={e.years}
               title={e.title}
-              heroes={e.heroes.map((c) => heroById(c.heroId))}
               delayMs={(i % 3) * 60}
             />
           ))}
