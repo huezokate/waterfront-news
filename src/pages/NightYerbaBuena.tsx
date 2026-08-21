@@ -2,12 +2,14 @@ import { Link } from 'react-router-dom';
 import '../styles/directions.css';
 import '../styles/night.css';
 import { YERBA_BUENA_EVENTS } from '../data/nightYerbaBuena';
-import { asset } from '../lib/asset';
+import { heroById } from '../data/heroes';
 import { useCameraFocus, useScrollReveal } from '../lib/nightFx';
 import ScrollProgress from '../components/ScrollProgress';
+import MasonryGrid from '../components/night/MasonryGrid';
+import PlateCard from '../components/night/PlateCard';
 
-/* Yerba Buena browse — Direction D prototype. Masonry of historic plates;
-   each stack = image / year / 2–3 word title. Tap a plate to open its chapter. */
+/* Yerba Buena browse — Direction D prototype. Masonry of historic plates; each
+   plate is picture + date, and tapping either opens the chapter. */
 export default function NightYerbaBuena() {
   const rootRef = useScrollReveal(true);
   useCameraFocus(true, rootRef);
@@ -25,27 +27,24 @@ export default function NightYerbaBuena() {
           <div className="dx-masthead__kicker">TimeLens · Chapter One of the Trail</div>
           <h1 className="dx-masthead__name">Yerba Buena Cove</h1>
           <div className="dx-masthead__rule">
-            <span className="dx-fleuron">❦</span> 1833–1870 · Nine chapters · Tap a plate{' '}
+            <span className="dx-fleuron">❦</span> 1833–1870 · Nine chapters · Three tellers each{' '}
             <span className="dx-fleuron">❦</span>
           </div>
         </header>
 
-        <div className="nx-masonry">
+        <MasonryGrid>
           {YERBA_BUENA_EVENTS.map((e, i) => (
-            <Link
+            <PlateCard
               key={e.id}
-              className="nx-stack dx-reveal"
               to={`/night/yerba-buena/${e.id}`}
-              onClick={() => navigator.vibrate?.(10)}
-              style={{ transitionDelay: `${(i % 3) * 60}ms` }}
-            >
-              <img src={asset(e.image)} alt={`${e.title}, ${e.years}`} loading="lazy" />
-              <span className="nx-stack__year">{e.years}</span>
-              <span className="nx-stack__title">{e.title}</span>
-              <span className="nx-stack__guide">told by {e.guide.name}</span>
-            </Link>
+              image={e.image}
+              years={e.years}
+              title={e.title}
+              heroes={e.heroes.map((c) => heroById(c.heroId))}
+              delayMs={(i % 3) * 60}
+            />
           ))}
-        </div>
+        </MasonryGrid>
       </div>
     </div>
   );

@@ -9,3 +9,11 @@ JIMMY PIX/
 
 # local Figma sync dumps
 figma-vars*.json
+
+*storybook.log
+storybook-static
+
+# Storybook
+storybook-static
+*storybook.log
+debug-storybook.log

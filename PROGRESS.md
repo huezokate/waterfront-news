@@ -1,5 +1,49 @@
 # TimeLens — Progress Log
 
+## Session — 2026-08-21 (Story flow + Storybook + the cast)
+
+### Done
+- **Storybook 9** (`@storybook/react-vite`) — `npm run storybook`, `npm run build-storybook`.
+  The preview decorator mirrors the real app rather than being a neutral canvas: every story
+  renders inside `.dx.dx--d` (Direction D theme vars), inside a 430px `.app-shell` frame, inside
+  the padded `.dx-page` column. Per-story escapes: `parameters.frame: false` (full window),
+  `parameters.column: false` (full-bleed). Fonts load via `.storybook/preview-head.html`.
+- **Chapter page reflowed** to: ambient landscape → select the hero → the dispatch in their
+  voice → ask them → the date before / the date after → drill down into the history.
+- **Pick-a-hero mechanic.** Every chapter is cast with THREE storytellers instead of one guide,
+  one each from *office*, *trade* and *the street*, so the choice is a change of vantage rather
+  than a change of byline. Choosing rebinds the landscape credit, the opening paragraph of the
+  dispatch, the chat and the audio walk. The pick follows the reader down the trail
+  (sessionStorage) when the same hero is cast in the next chapter.
+- **New cast of 16** in `src/data/heroes.ts` (roster is separate from chapters because heroes
+  recur, and because each one becomes exactly one 3D figurine). 27 chapter-specific `lens`
+  paragraphs written.
+- **Components extracted** to `src/components/night/`, each with stories: `HeroAvatar`,
+  `HeroSelect`, `AmbientLandscape`, `PlateCard`, `MasonryGrid`, `TimelineStep`, `DrillDownCard`,
+  `SectionHead`, `HeroChat`, and `ChapterView` (the whole page — `pages/NightEvent` is now just a
+  route wrapper, so Storybook renders the real page rather than a copy).
+- **Figurine seam**: `HeroAvatar` is the only component that draws a face. Drop a render at
+  `public/figurines/<id>.png`, set `figurine` on the hero, and it upgrades everywhere at once.
+  Brief + priority shot-list in `docs/figurines.md`.
+- **Fixes found while building**: the article drop cap was landing on the dateline rather than the
+  prose (`p:first-of-type` is the dateline); long hero names blew out the `1fr` select tracks
+  (grid items default to `min-width: auto`); and a `100vw` full-bleed built an element far wider
+  than the 430px `.app-shell` and got sliced — the landscape now bleeds to the *column*.
+
+### Not built (deliberately)
+- No audio walk, historian reaction or making-of film exists yet. Those cards render as
+  `pending` — dashed, "not yet recorded", not clickable — rather than faking a working link.
+- The historian slot names no historian. Attributing commentary to a real named historian who
+  has not recorded any would be a fabrication.
+- Figurines themselves: `docs/figurines.md` is the brief, the models are not generated.
+
+### Next
+1. Kate reviews on localhost; taste pass on the hero-select and the drill-down cards.
+2. Generate the first six figurines (Briones, Davis, Brannan, Vallejo, Geary, Pleasant).
+3. Shoot or assemble one real ambient landscape loop to replace the Ken Burns stand-in.
+4. Code Connect the new `night/` components to Figma.
+
+
 ## Session — 2026-06-02 (Victorian Broadsheet build)
 
 ### Done
