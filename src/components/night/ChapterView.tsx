@@ -9,6 +9,7 @@ import HeroChat from './HeroChat';
 import SectionHead from './SectionHead';
 import TimelineStep from './TimelineStep';
 import DrillDownCard from './DrillDownCard';
+import ArchiveShelf from './ArchiveShelf';
 
 /* The whole chapter, top to bottom:
 
@@ -136,9 +137,10 @@ export default function ChapterView({
       <section className="nx-drills dx-reveal" aria-label="Drill down into the history">
         <SectionHead
           label="Drill down into the history"
-          hint={`Three ways deeper into ${event.years}.`}
+          hint={`Start with the sheets themselves; the rest of ${event.years} is still being made.`}
         />
         <div className="nx-drills__stack">
+          <ArchiveShelf chapterId={event.id} years={event.years} />
           <DrillDownCard
             kind="audio"
             title={`Walk ${event.title} with ${hero.short}`}

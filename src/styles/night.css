@@ -608,3 +608,106 @@
   from { transform: scale(1); opacity: 1; }
   to { transform: scale(1.35); opacity: 0; }
 }
+
+/* ── The plate archive ───────────────────────────────────────────── */
+/* The primary card in the drill-down: solid rust outline against the dashed
+   secondaries, because it is the one way in that actually has material behind
+   it today. */
+.nx-drill--primary {
+  border: 1.5px solid var(--dx-accent);
+  background: linear-gradient(180deg, rgba(218, 76, 41, 0.1), rgba(21, 25, 31, 0.6));
+  box-shadow: 0 0 30px -14px var(--dx-accent);
+}
+.nx-drill--primary .nx-drill__thumb img { filter: saturate(1.15) contrast(1.05) brightness(0.7); }
+.nx-drill--primary .nx-drill__icon {
+  border-color: var(--dx-accent);
+  background: rgba(218, 76, 41, 0.2);
+}
+.nx-drill--primary .nx-drill__title { font-weight: 700; font-size: 16px; }
+.nx-drill--primary .nx-drill__cta { color: var(--dx-accent-ink); font-weight: 700; }
+.nx-drill--primary:hover { border-color: #ff6a3d; }
+
+.nx-archive__grid {
+  margin-top: 10px;
+  columns: 2;
+  column-gap: 8px;
+}
+.nx-plate {
+  display: block;
+  width: 100%;
+  break-inside: avoid;
+  margin: 0 0 8px;
+  padding: 0;
+  text-align: left;
+  border: 1px solid var(--dx-rule);
+  background: var(--nx-plate);
+  color: var(--dx-ink);
+  cursor: zoom-in;
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+}
+.nx-plate img {
+  display: block;
+  width: 100%;
+  filter: saturate(1.2) contrast(1.08);
+}
+.nx-plate__cap { display: block; padding: 7px 9px 9px; }
+.nx-plate__kind {
+  display: block;
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--dx-accent-ink);
+}
+.nx-plate__title { display: block; margin-top: 2px; font-size: 12px; line-height: 1.35; }
+@media (prefers-reduced-motion: no-preference) {
+  .nx-plate { transition: border-color 0.3s ease, transform 0.2s ease; }
+  .nx-plate:hover { border-color: rgba(218, 76, 41, 0.55); transform: translateY(-2px); }
+  .nx-plate:active { transform: scale(0.98); }
+}
+
+.nx-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 52px 16px 24px;
+  background: rgba(12, 14, 18, 0.94);
+  backdrop-filter: blur(6px);
+  cursor: zoom-out;
+}
+.nx-lightbox__img {
+  max-width: 100%;
+  max-height: 72vh;
+  object-fit: contain;
+  border: 1px solid var(--dx-rule);
+  cursor: default;
+}
+.nx-lightbox__cap { margin: 0; max-width: 560px; text-align: center; }
+.nx-lightbox__title {
+  display: block;
+  margin-top: 3px;
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-size: 15px;
+  color: var(--dx-ink);
+}
+.nx-lightbox__years { display: block; margin-top: 3px; font-size: 12.5px; color: var(--dx-meta); }
+.nx-lightbox__close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--dx-rule);
+  background: rgba(21, 25, 31, 0.7);
+  color: var(--dx-ink);
+  cursor: pointer;
+}

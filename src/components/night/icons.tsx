@@ -52,3 +52,16 @@ export const FilmIcon = ({ size = 22 }: { size?: number }) => (
     <path d="M10 9.2v5.6l5-2.8-5-2.8z" />
   </svg>
 );
+
+export const ArchiveIcon = ({ size = 22 }: { size?: number }) => (
+  <svg {...base} width={size} height={size}>
+    <path d="M4 8.5 12 4.5l8 4-8 4-8-4z" />
+    <path d="M4 12.5 12 16.5l8-4M4 16.5 12 20.5l8-4" />
+  </svg>
+);
+
+export const CloseIcon = ({ size = 22 }: { size?: number }) => (
+  <svg {...base} width={size} height={size}>
+    <path d="M6 6l12 12M18 6L6 18" />
+  </svg>
+);
